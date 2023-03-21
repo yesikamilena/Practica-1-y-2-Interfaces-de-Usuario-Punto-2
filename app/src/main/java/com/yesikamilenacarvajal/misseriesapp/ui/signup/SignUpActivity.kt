@@ -50,64 +50,61 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         signUpBinding.registerButton.setOnClickListener {
-            Log.d("saludito", "hola")
-            Log.e("saludito2", "hola2")
-            Log.i("saludito3", "hola3")
 
-            /*  var email = signUpBinding.emailEditText.text.toString()
-              var password = signUpBinding.passwordEditText.text.toString()
-              var repPassword = signUpBinding.repPasswordEditText.text.toString()*/
-
-            //var numero1 = signUpBinding.emailEditText.text.toString().toDouble()
-            //var numero2 = signUpBinding.passwordEditText.text.toString().toDouble()
-            //var suma = numero1 + numero2
-            //var pot = Math.pow(numero1,numero2)
-            //var raiz = Math.sqrt(numero1)
-            //var raiz2= numero1.pow(numero1)
-
-            //signUpBinding.repPasswordEditText.setText(raiz2.toString())
-
+            val name = signUpBinding.nameEditText.text.toString()
             val email = signUpBinding.emailEditText.text.toString()
             val password = signUpBinding.passwordEditText.text.toString()
-            val reppassword = signUpBinding.repPasswordEditText.text.toString()
-            val genre = if(signUpBinding.maleRadioButton.isChecked)
-                "Masculino"
-            else
-                "Femenino"
+            val repassword = signUpBinding.repPasswordEditText.text.toString()
 
-           var favoritesGenre = ""
-            if (signUpBinding.actionCheckBox.isChecked) favoritesGenre = "Acción"
-            if (signUpBinding.adventureCheckBox.isChecked) favoritesGenre += "Aventura"
-            if (signUpBinding.loveCheckBox.isChecked) favoritesGenre += "Romántico"
-            if (signUpBinding.suspenceCheckBox.isChecked) favoritesGenre += "Suspenso"
+            if (name == "" || email == "" || password == "" || repassword == "") {
+                if (name == "") signUpBinding.nameEditText.error = "Campo obligatorio."
+                if (email == "") signUpBinding.emailEditText.error = "Campo obligatorio."
+                if (password == "") signUpBinding.passwordEditText.error = "Campo obligatorio."
+                if (repassword == "") signUpBinding.repPasswordEditText.error = "Campo obligatorio."
+            }
+            else if (password == repassword)    {
+                val genre = if(signUpBinding.maleRadioButton.isChecked)
+                    "Masculino"
+                else
+                    "Femenino"
 
-
-
-            /* *************DatePicker************ */
-            val year = signUpBinding.datePicker.year.toString()
-            val month = signUpBinding.datePicker.month.toString()
-            val day = signUpBinding.datePicker.dayOfMonth.toString()
-
-
-            val city = signUpBinding.citiesSpinner.selectedItem.toString()
+                var favoritesGenre = ""
+                if (signUpBinding.musicCheckBox.isChecked) favoritesGenre = "Music "
+                if (signUpBinding.sportsCheckBox.isChecked) favoritesGenre += "Sports "
+                if (signUpBinding.readingCheckBox.isChecked) favoritesGenre += "Reading "
+                if (signUpBinding.watchingMoviesCheckBox.isChecked) favoritesGenre += "Watching movies "
 
 
-            val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre \nYear: $year \nMonth: $month \nDay: $day \ncity: $city"
+                /* *************DatePicker************ */
+                val year = signUpBinding.datePicker.year.toString()
+                var month = signUpBinding.datePicker.month.toString()
+                val day = signUpBinding.datePicker.dayOfMonth.toString()
+
+                /* *************Spinner************ */
+                val city = signUpBinding.citiesSpinner.selectedItem.toString()
+                
+                var month2=(month.toInt()+1).toString();
 
 
-            if (password == reppassword)
+                val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre \nYear: $year \nMonth: $month2 \nDay: $day \ncity: $city"
+
                 signUpBinding.infoTextView.text = info
-            else{
-                Toast.makeText(applicationContext,"Las contraseñas no son iguales",    Toast.LENGTH_LONG ).show()   //Opcion1. Mensaje en burbuja
-                signUpBinding.repPasswordTextInputLayout.error= "Las contraseñas no son iguales"                         //Opcion2. Mensaje en rojo
-                Snackbar.make(signUpBinding.LinearLayout, "las contraseñas no son iguales", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Aceptar"){
+            }
+
+            else {
+               signUpBinding.repPasswordTextInputLayout.error =
+                    "Las contraseñas no son iguales"                         //Opcion2. Mensaje en rojo
+                Snackbar.make(
+                    signUpBinding.LinearLayout,
+                    "las contraseñas no son iguales",
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                    .setAction("Aceptar") {
                         signUpBinding.repPasswordEditText.setText("")
-                        signUpBinding.repPasswordTextInputLayout.isErrorEnabled= false
+                        signUpBinding.repPasswordTextInputLayout.isErrorEnabled = false
                     }
                     .show()   //Opción3. Mensaje de burbuja oscura
             }
-
         }
     }
 }

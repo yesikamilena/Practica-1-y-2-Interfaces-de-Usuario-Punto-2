@@ -139,14 +139,14 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/action_check_box"
+                android:id="@+id/music_check_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/music" />
 
             <CheckBox
-                android:id="@+id/adventure_check_box"
+                android:id="@+id/sports_check_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -160,14 +160,14 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/love_check_box"
+                android:id="@+id/reading_check_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/reading" />
 
             <CheckBox
-                android:id="@+id/suspence_check_box"
+                android:id="@+id/watching_movies_check_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
