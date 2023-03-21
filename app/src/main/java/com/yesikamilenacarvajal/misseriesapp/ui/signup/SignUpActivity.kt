@@ -18,22 +18,6 @@ import java.text.DateFormat
 import java.util.*
 
 
-/*
-class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
-
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
-    }
-}
-*/
-
-
-
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -100,11 +84,9 @@ class SignUpActivity : AppCompatActivity() {
 
 
             /* *************DatePicker************ */
-
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
+            val year = signUpBinding.datePicker.year.toString()
+            val month = signUpBinding.datePicker.month.toString()
+            val day = signUpBinding.datePicker.dayOfMonth.toString()
 
 
             val city = signUpBinding.citiesSpinner.selectedItem.toString()
@@ -112,13 +94,6 @@ class SignUpActivity : AppCompatActivity() {
 
             val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre \nYear: $year \nMonth: $month \nDay: $day \ncity: $city"
 
-
-
-/*
-            Log.d("año", "$year")
-            Log.e("mes", "$month")
-            Log.i("día", "$day")
-*/
 
             if (password == reppassword)
                 signUpBinding.infoTextView.text = info
