@@ -1,23 +1,69 @@
 package com.yesikamilenacarvajal.misseriesapp.ui.signup
 
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.Dialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.yesikamilenacarvajal.misseriesapp.R
 import com.yesikamilenacarvajal.misseriesapp.databinding.ActivitySignUpBinding
 import kotlin.math.pow
+import androidx.fragment.app.DialogFragment
+import java.text.DateFormat
+import java.util.*
+
+
+/*
+class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // Another interface callback
+    }
+}
+*/
+
+
+
 
 class SignUpActivity : AppCompatActivity() {
 
+
     private lateinit var signUpBinding: ActivitySignUpBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         signUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
         var view = signUpBinding.root
         setContentView(view)
+
+
+        /* *******************Spinner************ */
+        //Se pone acá porque se tiene que modificar sin presionar antes el botón de guardar
+        val spinner: Spinner = findViewById(R.id.cities_spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.combo_cities,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
         signUpBinding.registerButton.setOnClickListener {
             Log.d("saludito", "hola")
@@ -51,10 +97,28 @@ class SignUpActivity : AppCompatActivity() {
             if (signUpBinding.loveCheckBox.isChecked) favoritesGenre += "Romántico"
             if (signUpBinding.suspenceCheckBox.isChecked) favoritesGenre += "Suspenso"
 
-            val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre"
 
 
-            signUpBinding.infoTextView.setText(info)
+            /* *************DatePicker************ */
+
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+            val city = signUpBinding.citiesSpinner.selectedItem.toString()
+
+
+            val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre \nYear: $year \nMonth: $month \nDay: $day \ncity: $city"
+
+
+
+/*
+            Log.d("año", "$year")
+            Log.e("mes", "$month")
+            Log.i("día", "$day")
+*/
 
             if (password == reppassword)
                 signUpBinding.infoTextView.text = info

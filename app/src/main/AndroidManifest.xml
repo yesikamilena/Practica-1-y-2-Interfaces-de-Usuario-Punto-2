@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MisSeriesApp"
         tools:targetApi="31">
         <activity
+            android:name=".DatePickerFragment"
+            android:exported="false" />
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"

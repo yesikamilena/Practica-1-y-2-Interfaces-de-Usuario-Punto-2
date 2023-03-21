@@ -173,16 +173,30 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/birthday"
-            android:textColor="@color/black" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_date"
+            android:text="Select Date"
+            android:textSize="40sp"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date_text_input_layout"
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -191,6 +205,12 @@
             android:layout_height="wrap_content"
             android:text="@string/birthplace"
             android:textColor="@color/black" />
+
+
+        <Spinner
+            android:id="@+id/cities_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/register_button"

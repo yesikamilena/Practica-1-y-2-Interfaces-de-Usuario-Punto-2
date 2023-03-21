@@ -28,4 +28,13 @@
     <string name="reading">Leer</string>
     <string name="birthday">Fecha de nacimiento</string>
     <string name="birthplace">Lugar de nacimiento</string>
+
+    <string-array name= "combo_cities">
+        <item>Bogotá</item>
+        <item>Medellín</item>
+        <item>Barranquilla</item>
+        <item>Cali</item>
+        <item>Pasto</item>
+
+    </string-array>
 </resources>
