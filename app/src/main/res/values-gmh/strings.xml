@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mis Hobbies App</string>
+    <string name="form_reg">Anmeldeformular</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Kennwort</string>
+    <string name="rep_password">Kennwort wiederholen</string>
+    <string name="requiered_film">*Pflichtfeld</string>
+    <string name="register">Anmelden</string>
+    <string name="info">Info</string>
+    <string name="female">Frau</string>
+    <string name="male">Mann</string>
+    <string name="action">Aktion</string>
+    <string name="adventure">Abenteuer</string>
+    <string name="comic">Komisch</string>
+    <string name="suspence">Spannung</string>
+    <string name="terror">Terror</string>
+    <string name="love">Liebe</string>
+    <string name="genre_favorites">Lieblingsgenres</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="favorites_hobbies">Lieblingshobbies</string>
+    <string name="music">Musik</string>
+    <string name="sport">Sport</string>
+    <string name="dance">Tanzen</string>
+    <string name="watching_movies">Fehersehen</string>
+    <string name="reading">Lektüre</string>
+    <string name="birthday">Geburtstag</string>
+    <string name="birthplace">Geburtsort</string>}
+
+    <string-array name= "combo_cities">
+        <item>Berlin</item>
+        <item>Hamburg</item>
+        <item>Münschen</item>
+        <item>Frankfurt</item>
+        <item>Stuttgart</item>
+
+    </string-array>
+
+
+</resources>

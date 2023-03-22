@@ -14,24 +14,10 @@ import com.yesikamilenacarvajal.misseriesapp.R
 import com.yesikamilenacarvajal.misseriesapp.databinding.ActivitySignUpBinding
 import kotlin.math.pow
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import java.text.DateFormat
 import java.util.*
-
-
-/*
-class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
-
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
-    }
-}
-*/
-
 
 
 
@@ -39,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
     private lateinit var signUpBinding: ActivitySignUpBinding
+    private lateinit var signUpViewModel: SignUpViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +33,9 @@ class SignUpActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         signUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
+
+        signUpViewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
+
         var view = signUpBinding.root
         setContentView(view)
 
@@ -65,74 +55,78 @@ class SignUpActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
-        signUpBinding.registerButton.setOnClickListener {
-            Log.d("saludito", "hola")
-            Log.e("saludito2", "hola2")
-            Log.i("saludito3", "hola3")
 
-            /*  var email = signUpBinding.emailEditText.text.toString()
-              var password = signUpBinding.passwordEditText.text.toString()
-              var repPassword = signUpBinding.repPasswordEditText.text.toString()*/
+        val namevacioObserver = Observer<Int>{namevacio ->
+            signUpBinding.nameEditText.error = "Campo obligatorio."
+        }
+        val emailvacioObserver = Observer<Int>{emailvacio ->
+            signUpBinding.emailEditText.error = "Campo obligatorio."
+        }
+        val passwordvacioObserver = Observer<Int>{passwordvacio ->
+            signUpBinding.passwordEditText.error = "Campo obligatorio."
+        }
+        val repasswordvacioObserver = Observer<Int>{repasswordvacio ->
+            signUpBinding.repPasswordEditText.error = "Campo obligatorio."
+        }
+        val info1Observer = Observer<String>{ info1 ->
 
-            //var numero1 = signUpBinding.emailEditText.text.toString().toDouble()
-            //var numero2 = signUpBinding.passwordEditText.text.toString().toDouble()
-            //var suma = numero1 + numero2
-            //var pot = Math.pow(numero1,numero2)
-            //var raiz = Math.sqrt(numero1)
-            //var raiz2= numero1.pow(numero1)
-
-            //signUpBinding.repPasswordEditText.setText(raiz2.toString())
-
-            val email = signUpBinding.emailEditText.text.toString()
-            val password = signUpBinding.passwordEditText.text.toString()
-            val reppassword = signUpBinding.repPasswordEditText.text.toString()
             val genre = if(signUpBinding.maleRadioButton.isChecked)
                 "Masculino"
             else
                 "Femenino"
 
-           var favoritesGenre = ""
-            if (signUpBinding.actionCheckBox.isChecked) favoritesGenre = "Acción"
-            if (signUpBinding.adventureCheckBox.isChecked) favoritesGenre += "Aventura"
-            if (signUpBinding.loveCheckBox.isChecked) favoritesGenre += "Romántico"
-            if (signUpBinding.suspenceCheckBox.isChecked) favoritesGenre += "Suspenso"
-
+            var favoritesGenre = ""
+            if (signUpBinding.musicCheckBox.isChecked) favoritesGenre = "Music "
+            if (signUpBinding.sportsCheckBox.isChecked) favoritesGenre += "Sports "
+            if (signUpBinding.readingCheckBox.isChecked) favoritesGenre += "Reading "
+            if (signUpBinding.watchingMoviesCheckBox.isChecked) favoritesGenre += "Watching movies "
 
 
             /* *************DatePicker************ */
+            val year = signUpBinding.datePicker.year.toString()
+            var month = signUpBinding.datePicker.month.toString()
+            val day = signUpBinding.datePicker.dayOfMonth.toString()
 
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-
-
+            /* *************Spinner************ */
             val city = signUpBinding.citiesSpinner.selectedItem.toString()
 
+            var month2=(month.toInt()+1).toString();
 
-            val info = "Email: $email \nPassword: $password \nGenre: $genre \nFavorite Genre: $favoritesGenre \nYear: $year \nMonth: $month \nDay: $day \ncity: $city"
-
-
-
-/*
-            Log.d("año", "$year")
-            Log.e("mes", "$month")
-            Log.i("día", "$day")
-*/
-
-            if (password == reppassword)
-                signUpBinding.infoTextView.text = info
-            else{
-                Toast.makeText(applicationContext,"Las contraseñas no son iguales",    Toast.LENGTH_LONG ).show()   //Opcion1. Mensaje en burbuja
-                signUpBinding.repPasswordTextInputLayout.error= "Las contraseñas no son iguales"                         //Opcion2. Mensaje en rojo
-                Snackbar.make(signUpBinding.LinearLayout, "las contraseñas no son iguales", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Aceptar"){
-                        signUpBinding.repPasswordEditText.setText("")
-                        signUpBinding.repPasswordTextInputLayout.isErrorEnabled= false
-                    }
-                    .show()   //Opción3. Mensaje de burbuja oscura
-            }
+            signUpBinding.infoTextView.text = "$info1 \nGénero: $genre \nHobby(ies) Favorito(s): $favoritesGenre \nFecha de nacimiento: Año: $year Mes: $month Día: $day"
 
         }
+        val passnoigualObserver = Observer<Int>{passnoigual ->
+
+            signUpBinding.repPasswordTextInputLayout.error =
+                "Las contraseñas no son iguales"                         //Opcion2. Mensaje en rojo
+            Snackbar.make(
+                signUpBinding.LinearLayout,
+                "las contraseñas no son iguales",
+                Snackbar.LENGTH_INDEFINITE
+            )
+                .setAction("Aceptar") {
+                    signUpBinding.repPasswordEditText.setText("")
+                    signUpBinding.repPasswordTextInputLayout.isErrorEnabled = false
+                }
+                .show()   //Opción3. Mensaje de burbuja oscura
+        }
+
+        signUpViewModel.namevacio.observe(this, namevacioObserver)
+        signUpViewModel.emailvacio.observe(this, emailvacioObserver)
+        signUpViewModel.passwordvacio.observe(this, passwordvacioObserver)
+        signUpViewModel.repasswordvacio.observe(this, repasswordvacioObserver)
+        signUpViewModel.info1.observe(this, info1Observer)
+        signUpViewModel.passnoigual.observe(this, passnoigualObserver)
+
+
+        signUpBinding.registerButton.setOnClickListener {
+
+            val name = signUpBinding.nameEditText.text.toString()
+            val email = signUpBinding.emailEditText.text.toString()
+            val password = signUpBinding.passwordEditText.text.toString()
+            val repassword = signUpBinding.repPasswordEditText.text.toString()
+
+            signUpViewModel.revisarvacios(name, email, password, repassword)
+       }
     }
 }
